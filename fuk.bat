@@ -8,8 +8,7 @@ set id=%date:~6,4%%date:~3,2%%date:~0,2%%time:~0,2%%time:~3,2%%time:~6,2%
 start /min /high /wait Shortcut.vbs %id% "%~dp0fuk.bat" %iconName% "%~dp0src\img\jail.ico" %iconsCount%
 
 ::Change Wallpaper
-::reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%~dp0src\img\uwu.bmp" /f 
-::RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
+powershell -ExecutionPolicy RemoteSigned -File "%~dp0src\wallpaper.ps1"
 
 ::Volume to 100%--------------------------------------------------------------------------------------------------------------------------
 SetVol.exe unmute
@@ -22,8 +21,7 @@ start /min /high sound.vbs "%~dp0src\sfx\congrats.mp3"
 
 ::Change Wallpaper Loop------------------------------------------------------------------------------------------------------------------------
 for /l %%x in (1, 1, %wallpaperSwapCount%) do (
-	reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v Wallpaper /t REG_SZ /d "%~dp0src\img\uwu.bmp" /f 
-	RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
+	powershell -ExecutionPolicy RemoteSigned -File "%~dp0src\wallpaper.ps1"
 	timeout %wallpaperTimeout%
 )
 
